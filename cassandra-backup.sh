@@ -35,7 +35,7 @@ ls -la /var/backup
   tar cv -C /tmp schema -C /var/lib/cassandra -T - > /var/backup/backup.tar
 
 nodetool -h $COREOS_PRIVATE_IPV4 clearsnapshot
-"
+" || ( kill $OUTPUT_PID && rm -rf $TMP_DIR && exit 1 )
 
 wait $OUTPUT_PID
 rm -rf $TMP_DIR
